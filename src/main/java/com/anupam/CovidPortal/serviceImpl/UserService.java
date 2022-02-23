@@ -4,7 +4,7 @@ import com.anupam.CovidPortal.model.RegisterModel;
 
 public interface UserService {
 
-	void sendOtpEmail(String mailId, String body, String header);
+	public boolean sendOtpEmail(String mailId, String body, String header);
 
 	void saveUser(RegisterModel registerModel);
 

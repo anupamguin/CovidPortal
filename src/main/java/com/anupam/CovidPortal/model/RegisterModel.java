@@ -31,10 +31,6 @@ public class RegisterModel {
 	@Column()
 	private int age;
 
-	@NotBlank(message = "Address is not be empty")
-	@Column
-	private String address;
-
 	@NotBlank(message = "Password field is Required")
 	@Column
 	private String password;
@@ -98,17 +94,9 @@ public class RegisterModel {
 		this.age = age;
 	}
 
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
 	@Override
 	public String toString() {
 		return "RegisterModel [id=" + id + ", name=" + name + ", email=" + email + ", mobile=" + mobile + ", age=" + age
-				+ ", address=" + address + ", password=" + password + ", confirmPassword=" + confirmPassword + "]";
+				+", password=" + password + ", confirmPassword=" + confirmPassword + "]";
 	}
 }

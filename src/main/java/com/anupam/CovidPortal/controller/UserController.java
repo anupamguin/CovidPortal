@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,7 @@ import com.anupam.CovidPortal.validator.UserValidator;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin
 public class UserController {
 
 	@Autowired
@@ -32,7 +34,7 @@ public class UserController {
 	@Autowired
 	MapValidationErrorService mapValidationErrorService;
 	
-	@GetMapping("/login")
+	@PostMapping("/login")
 	public ResponseEntity<?> login(){
 		return null;
 	}
@@ -57,13 +59,13 @@ public class UserController {
 			
 			String body= "Hi,"+registerModel.getName()+"\n Your Covid Portal OTP is : "+otp+
 			"\n Thanks For Your Registration on this Portal Dear "+registerModel.getName()+
-			". We think that You will be Stay at "+registerModel.getAddress()+". \n Yours Faithfully, Anupam Guin ( FullStack Software Engineer )";
+			". We think that You will be Stay at your Home. \n Yours Faithfully, Anupam Guin ( FullStack Software Engineer )";
 			
-			userService.sendOtpEmail(registerModel.getEmail(), body, header);
+			boolean b = userService.sendOtpEmail(registerModel.getEmail(), body, header);
+			map.put("success", b);
 		}catch(Exception e) {
 			map.put("success", false);
-		}
-		    map.put("success", true);
+		}		    
 		return ResponseEntity.ok(map);
 	}
 	
