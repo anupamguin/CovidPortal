@@ -9,8 +9,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "user_table")
-public class RegisterModel {
+@Table(name = "user_final_table")
+public class OtpResponseModel {
 
 	@Id
 	private int id;
@@ -30,24 +30,11 @@ public class RegisterModel {
 
 	@Column()
 	private int age;
-
-	@Column
-	private int otp;
 	
 	@NotBlank(message = "Password field is Required")
 	@Column
 	private String password;
 
-	@Transient
-	private String confirmPassword;
-
-	public int getOtp() {
-		return otp;
-	}
-
-	public void setOtp(int otp) {
-		this.otp = otp;
-	}
 
 	public int getId() {
 		return id;
@@ -63,14 +50,6 @@ public class RegisterModel {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
 	}
 
 	public String getName() {
@@ -107,8 +86,25 @@ public class RegisterModel {
 
 	@Override
 	public String toString() {
-		return "RegisterModel [id=" + id + ", name=" + name + ", email=" + email + ", mobile=" + mobile + ", age=" + age
-				+ ", otp=" + otp + ", password=" + password + ", confirmPassword=" + confirmPassword + "]";
+		return "OtpResponse [id=" + id + ", name=" + name + ", email=" + email + ", mobile=" + mobile + ", age=" + age
+				+ ", password=" + password + "]";
 	}
 
+	public OtpResponseModel() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public OtpResponseModel(int id, @NotBlank(message = "Name is Required") String name,
+			@Email(message = "Invalid Email") @NotBlank(message = "Email is not be Blank") String email,
+			@NotBlank(message = "Mobile is not be empty") String mobile, int age,
+			@NotBlank(message = "Password field is Required") String password) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.mobile = mobile;
+		this.age = age;
+		this.password = password;
+	}
 }
