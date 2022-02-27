@@ -78,13 +78,16 @@ public class UserServiceImpl implements UserService {
 		try {
 			RegisterModel rm = userRepo.findById(id).get();
 			System.err.println(rm);
+			
 			if (rm.getOtp() == otp) {
 				OtpResponseModel orm = new OtpResponseModel(rm.getId(), rm.getName(), rm.getEmail(), rm.getMobile(),
 						rm.getAge(), rm.getPassword());
+				
 				otpRepo.save(orm);
 				userRepo.deleteById(id);
 				return orm;
 			}
+			userRepo.deleteById(id);
 		} catch (Exception x) {
 			return null;
 		}
